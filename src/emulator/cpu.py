@@ -1,0 +1,2 @@
+class CPU(object):
+    pass
