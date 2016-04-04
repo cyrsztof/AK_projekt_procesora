@@ -55,11 +55,11 @@ DIV rejestr, rejestr
 ```
 ##### Inkrementacja
 ```
-SUB rejestr, rejestr
+INC rejestr
 ```
 ##### Dekrementacja
 ```
-SUB rejestr, rejestr
+DEC rejestr
 ```
 
 #### Instrukcje logiczne
