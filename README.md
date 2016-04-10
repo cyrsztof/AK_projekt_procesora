@@ -28,13 +28,26 @@ Adres ze stałej: [123]
 Adres z etykiety: label
 ```
 ### Rozkazy procesora
+#### Ładowanie stałych
+```
+DB stała
+```
 #### Kopiowanie wartości
+##### Rejestr -> rejestr
 ```
 MOV rejestr, rejestr
-MOV rejestr, adres
-MOV rejestr, stała
-MOV adres, rejestr
-MOV adres, stała
+```
+##### Stała -> rejestr
+```
+SET stala, rejestr
+```
+##### Pamięć -> rejestr
+```
+LD [adres], rejestr
+```
+##### Rejestr -> pamięć
+```
+ST rejestr, [adres]
 ```
 #### Instrukcje arytmetyczne
 ##### Suma
