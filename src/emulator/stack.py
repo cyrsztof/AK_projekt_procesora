@@ -3,4 +3,4 @@ class Stack(object):
         pass
 
     def pop(self):
-        return
+        pass

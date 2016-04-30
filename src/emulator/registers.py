@@ -18,13 +18,7 @@ class Registers(object):
             return None
 
     def print(self):
-        print('Registers')
-        for i, v in enumerate(self._reg):
-            print('{}: {}'.format(i, v))
-
-
-if __name__ == '__main__':
-    r = Registers()
-    r[9] = 3
-    r[4] += 200
-    r.print()
+        print('Registers:')
+        print('    ' + ('{:>4}' * len(self._reg)).format(*range(len(self._reg))))
+        print('    ' + '-' * len(self._reg) * 4)
+        print('    ' + ('{:>4}' * len(self._reg)).format(*self._reg))

@@ -16,9 +16,10 @@ String: "I'm string"
 ```
 ### Rejestry
 ```
-Użycie: %Rx
+Użycie: Rx
 Ogólnego przeznaczenia: R0, R1, R2, R3, R4, R5, R6, R7
 Stosu: SP
+Instrukcji: IP
 ```
 ### Adresy
 ```

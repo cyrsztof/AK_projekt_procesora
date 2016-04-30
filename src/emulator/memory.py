@@ -19,12 +19,10 @@ class Memory(object):
 
     def print(self):
         print('Memory:')
-        for i, v in enumerate(self._mem):
-            print('{}: {}'.format(i, v))
-
-
-if __name__ == '__main__':
-    m = Memory()
-    print(m.store(209, 44))
-    print(m.load(343))
-    m.print()
+        print('    ' + ('{:>4}' * 16).format(*range(16)))
+        print('    ' + '-' * 16 * 4)
+        for i in range(16):
+            print('{:>3}|'.format(i * 16), end='')
+            for j in range(16):
+                print('{:>4}'.format(self.load(i * 16 + j)), end='')
+            print()
