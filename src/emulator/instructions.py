@@ -26,7 +26,13 @@ class Instructions(object):
     def next(self):
         opcode = opcodes[self.mem.load(self.pop())]
         argv = [self.mem.load(self.pop()) for _ in range(opcode.argc)]
+
+        if opcode.value == 0 and argv == [0, 0]:
+            return False
+
         opcode.execute(self.cpu, argv)
+
+        return True
 
     def pop(self):
         self.ip += 1

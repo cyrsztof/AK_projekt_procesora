@@ -23,8 +23,8 @@ Instrukcji: IP
 ```
 ### Adresy
 ```
-Adres z rejestru: [%R5]
-Adres z rejestru z offsetem: [%R3+7]
+Adres z rejestru: [R5]
+Adres z rejestru z offsetem: [R3+7]
 Adres ze stałej: [123]
 Adres z etykiety: label
 ```

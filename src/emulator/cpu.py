@@ -10,20 +10,15 @@ class CPU(object):
         self.instr = Instructions(self)
 
     def run(self):
-        self.instr.next()
-        self.instr.next()
-        self.instr.next()
-        self.instr.next()
-        self.instr.next()
-        self.instr.next()
+        while self.instr.next():
+            pass
 
 
 if __name__ == '__main__':
     cpu = CPU()
-    cpu.instr.read_from_file('test5')
+    cpu.instr.read_from_file('test12')
 
     cpu.run()
 
-    print('after')
     cpu.reg.print()
-    cpu.mem.print()
+    # cpu.mem.print()
