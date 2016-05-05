@@ -27,10 +27,13 @@ class Instructions(object):
         opcode = opcodes[self.mem.load(self.pop())]
         argv = [self.mem.load(self.pop()) for _ in range(opcode.argc)]
 
-        if opcode.value == 0 and argv == [0, 0]:
-            return False
+        # if opcode.value == 0 and argv == [0, 0]:
+        #     return False
 
         opcode.execute(self.cpu, argv)
+
+        print(self.ip, opcode.name, *argv)
+        self.reg.print()
 
         return True
 

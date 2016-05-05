@@ -8,15 +8,18 @@ class CPU(object):
         self.mem = Memory()
         self.reg = Registers()
         self.instr = Instructions(self)
+        self.zf = False
+        self.cf = False
 
     def run(self):
         while self.instr.next():
-            pass
+            print('zf', self.zf)
+            print('cf', self.cf)
 
 
 if __name__ == '__main__':
     cpu = CPU()
-    cpu.instr.read_from_file('test12')
+    cpu.instr.read_from_file('test25')
 
     cpu.run()
 
