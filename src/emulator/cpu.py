@@ -1,6 +1,7 @@
 from instructions import Instructions
 from memory import Memory
 from registers import Registers
+from stack import Stack
 
 
 class CPU(object):
@@ -8,18 +9,18 @@ class CPU(object):
         self.mem = Memory()
         self.reg = Registers()
         self.instr = Instructions(self)
+        self.stack = Stack(self)
         self.zf = False
         self.cf = False
 
     def run(self):
         while self.instr.next():
-            print('zf', self.zf)
-            print('cf', self.cf)
+            pass
 
 
 if __name__ == '__main__':
     cpu = CPU()
-    cpu.instr.read_from_file('test25')
+    cpu.instr.read_from_file('test27')
 
     cpu.run()
 

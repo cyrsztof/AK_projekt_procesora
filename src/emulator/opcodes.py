@@ -101,11 +101,33 @@ def CMP(system, args):
 def JZ(system, args):
     if system.zf:
         system.instr.ip += args[0]
+        system.instr.ip &= 0xff
 
 
 def JNZ(system, args):
     if not system.zf:
         system.instr.ip += args[0]
+        system.instr.ip &= 0xff
+
+
+def JC(system, args):
+    if system.cf:
+        system.instr.ip += args[0]
+        system.instr.ip &= 0xff
+
+
+def JNC(system, args):
+    if not system.cf:
+        system.instr.ip += args[0]
+        system.instr.ip &= 0xff
+
+
+def PUSH(system, args):
+    system.stack.push(system.reg[args[0]])
+
+
+def POP(system, args):
+    system.reg[args[0]] = system.stack.pop(args[0])
 
 
 def OUT(system, args):
@@ -140,6 +162,11 @@ opcodes = {
     0x20: Opcode(name='CMP', value=0x20, argc=2, execute=CMP),
     0x21: Opcode(name='JZ', value=0x21, argc=1, execute=JZ),
     0x22: Opcode(name='JNZ', value=0x22, argc=1, execute=JNZ),
+    0x23: Opcode(name='JC', value=0x23, argc=1, execute=JC),
+    0x24: Opcode(name='JNC', value=0x24, argc=1, execute=JNC),
+
+    0x30: Opcode(name='PUSH', value=0x30, argc=1, execute=PUSH),
+    0x31: Opcode(name='POP', value=0x31, argc=1, execute=POP),
 
     0xf2: Opcode(name='OUT', value=0xf2, argc=1, execute=OUT),
     0xff: Opcode(name='END', value=0xff, argc=0, execute=END),
