@@ -53,11 +53,11 @@ def MUL(system, args):
 
 
 def DIV(system, args):
-    system.reg[args[1]] = system.reg[args[0]] // system.reg[args[1]]
+    system.reg[args[1]] //= system.reg[args[0]]  # // system.reg[args[1]]
 
 
 def MOD(system, args):
-    system.reg[args[1]] = system.reg[args[0]] % system.reg[args[1]]
+    system.reg[args[1]] %= system.reg[args[0]]  #% system.reg[args[1]]
 
 
 def INC(system, args):

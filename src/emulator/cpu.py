@@ -20,9 +20,11 @@ class CPU(object):
 
 if __name__ == '__main__':
     cpu = CPU()
-    cpu.instr.read_from_file('test27')
+
+    import subprocess
+
+    fname = 'fib.nasm'
+    subprocess.call(['nasm', fname])
+    cpu.instr.read_from_file(fname.split('.')[0])
 
     cpu.run()
-
-    cpu.reg.print()
-    # cpu.mem.print()

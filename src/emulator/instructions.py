@@ -30,13 +30,14 @@ class Instructions(object):
         # if opcode.value == 0 and argv == [0, 0]:
         #     return False
 
+        # print(self.ip, opcode.name, *argv)
+
         opcode.execute(self.cpu, argv)
 
-        print(self.ip, opcode.name, *argv)
-        print('zf', self.cpu.zf)
-        print('cf', self.cpu.cf)
-        self.reg.print()
-        self.mem.print()
+        # print('zf', self.cpu.zf)
+        # print('cf', self.cpu.cf)
+        # self.reg.print()
+        # self.mem.print()
 
         return True
 
