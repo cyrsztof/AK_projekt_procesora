@@ -1,14 +1,14 @@
 [org 0x0]
 
 ; Registers.
-%define r0 0
-%define r1 1
-%define r2 2
-%define r3 3
-%define r4 4
-%define r5 5
-%define r6 6
-%define r7 7
+%define R0 0
+%define R1 1
+%define R2 2
+%define R3 3
+%define R4 4
+%define R5 5
+%define R6 6
+%define R7 7
 
 %macro MOV 2
 db 0x00, %1, %2
@@ -85,33 +85,54 @@ db 0x25, %1, %2
 db 0x30, %1, %2
 %endmacro
 
-%macro JZ 1
+%macro JC 1
 db 0x31, (%1 - ($ + 1))
 %endmacro
-%define JE JZ
-
-%macro JNZ 1
-db 0x32, (%1 - ($ + 1))
-%endmacro
-%define JNE JNZ
-
-%macro JC 1
-db 0x33, (%1 - ($ + 1))
-%endmacro
-%define JL JC
 
 %macro JNC 1
+db 0x32, (%1 - ($ + 1))
+%endmacro
+
+%macro JZ 1
+db 0x33, (%1 - ($ + 1))
+%endmacro
+
+%macro JNZ 1
 db 0x34, (%1 - ($ + 1))
 %endmacro
-%define JGE JNC
 
-%macro JLE 1
+%macro JA 1
 db 0x35, (%1 - ($ + 1))
 %endmacro
 
-%macro JG 1
+%macro JNA 1
 db 0x36, (%1 - ($ + 1))
 %endmacro
+
+%macro JB 1
+db 0x37, (%1 - ($ + 1))
+%endmacro
+
+%macro JNB 1
+db 0x38, (%1 - ($ + 1))
+%endmacro
+
+%macro JE 1
+db 0x39, (%1 - ($ + 1))
+%endmacro
+
+%macro JNE 1
+db 0x3a, (%1 - ($ + 1))
+%endmacro
+
+%macro JMP 1
+db 0x3b, (%1 - ($ + 1))
+%endmacro
+
+%macro JMPR 1
+db 0x3c, %1
+%endmacro
+
 
 %macro PUSH 1
 db 0x40, %1
@@ -122,24 +143,16 @@ db 0x41, %1
 %endmacro
 
 
-%macro JMP 1
+%macro CALL 1
 db 0x50, (%1 - ($ + 1))
 %endmacro
 
-%macro VJMPR 1
+%macro CALLR 1
 db 0x51, %1
 %endmacro
 
-%macro CALL 1
-db 0x52, (%1 - ($ + 1))
-%endmacro
-
-%macro CALLR 1
-db 0x53, %1
-%endmacro
-
 %macro RET 0
-db 0x54
+db 0x52
 %endmacro
 
 
@@ -159,10 +172,6 @@ db 0xf2, %1
 db 0xf3, %2, %1
 %endmacro
 
-%macro CRSH 0
-db 0xfe
-%endmacro
-
-%macro OFF 0
+%macro END 0
 db 0xff
 %endmacro

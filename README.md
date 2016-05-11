@@ -1,7 +1,7 @@
 #AK projekt procesora stałoprzecinkowego
 ## Dokumentacja
 ### Sładnia
-`etykieta: INSTRUKCJE   # komentarze`
+`etykieta: INSTRUKCJE   ; komentarze`
 ### Liczby
 ```
 Szesnaskowo: 0xAF
@@ -23,9 +23,6 @@ Instrukcji: IP
 ```
 ### Adresy
 ```
-Adres z rejestru: [R5]
-Adres z rejestru z offsetem: [R3+7]
-Adres ze stałej: [123]
 Adres z etykiety: label
 ```
 ### Rozkazy procesora
@@ -44,11 +41,11 @@ SET stala, rejestr
 ```
 ##### Pamięć -> rejestr
 ```
-LD [adres], rejestr
+LD rejestr, rejestr
 ```
 ##### Rejestr -> pamięć
 ```
-ST rejestr, [adres]
+ST rejestr, rejestr
 ```
 #### Instrukcje arytmetyczne
 ##### Suma
@@ -66,6 +63,10 @@ MUL rejestr, rejestr
 ##### Iloraz
 ```
 DIV rejestr, rejestr
+```
+##### Modulo
+```
+MOD rejestr, rejestr
 ```
 ##### Inkrementacja
 ```
@@ -106,10 +107,6 @@ SHL rejestr, rejestr
 CMP rejestr, rejestr
 ```
 #### Skoki
-##### Bezwarunkowy
-```
-JMP adres
-```
 ##### Warunkowe
 ```
 JC adres
@@ -123,10 +120,16 @@ JNB adres
 JE adres
 JNE adres
 ```
+##### Bezwarunkowe
+```
+JMP adres
+JMPR rejestr
+```
 #### Funkcje
 ##### Wywołanie
 ```
 CALL adres
+CALLR rejestr
 ```
 ##### Powrót
 ```

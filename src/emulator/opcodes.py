@@ -57,7 +57,7 @@ def DIV(system, args):
 
 
 def MOD(system, args):
-    system.reg[args[1]] %= system.reg[args[0]]  #% system.reg[args[1]]
+    system.reg[args[1]] %= system.reg[args[0]]  # % system.reg[args[1]]
 
 
 def INC(system, args):
@@ -98,18 +98,6 @@ def CMP(system, args):
     system.cf = res < 0
 
 
-def JZ(system, args):
-    if system.zf:
-        system.instr.ip += args[0]
-        system.instr.ip &= 0xff
-
-
-def JNZ(system, args):
-    if not system.zf:
-        system.instr.ip += args[0]
-        system.instr.ip &= 0xff
-
-
 def JC(system, args):
     if system.cf:
         system.instr.ip += args[0]
@@ -122,12 +110,68 @@ def JNC(system, args):
         system.instr.ip &= 0xff
 
 
+def JZ(system, args):
+    if system.zf:
+        system.instr.ip += args[0]
+        system.instr.ip &= 0xff
+
+
+def JNZ(system, args):
+    if not system.zf:
+        system.instr.ip += args[0]
+        system.instr.ip &= 0xff
+
+
+def JA(system, args):
+    pass
+
+
+def JNA(system, args):
+    pass
+
+
+def JB(system, args):
+    pass
+
+
+def JNB(system, args):
+    pass
+
+
+def JE(system, args):
+    pass
+
+
+def JNE(system, args):
+    pass
+
+
+def JMP(system, args):
+    pass
+
+
+def JMPR(system, args):
+    pass
+
+
 def PUSH(system, args):
     system.stack.push(system.reg[args[0]])
 
 
 def POP(system, args):
     system.reg[args[0]] = system.stack.pop(args[0])
+
+
+def CALL(system, args):
+    pass
+
+
+def CALLR(system, args):
+    pass
+
+
+def RET(system, args):
+    pass
 
 
 def OUT(system, args):
@@ -156,17 +200,29 @@ opcodes = {
     0x21: Opcode(name='AND', value=0x21, argc=2, execute=AND),
     0x22: Opcode(name='XOR', value=0x22, argc=2, execute=XOR),
     0x23: Opcode(name='NOT', value=0x23, argc=1, execute=NOT),
-    0x24: Opcode(name='SHL', value=0x24, argc=2, execute=SHL),
-    0x25: Opcode(name='SHR', value=0x25, argc=2, execute=SHR),
+    0x24: Opcode(name='SHR', value=0x24, argc=2, execute=SHR),
+    0x25: Opcode(name='SHL', value=0x25, argc=2, execute=SHL),
 
     0x30: Opcode(name='CMP', value=0x30, argc=2, execute=CMP),
-    0x31: Opcode(name='JZ', value=0x31, argc=1, execute=JZ),
-    0x32: Opcode(name='JNZ', value=0x32, argc=1, execute=JNZ),
-    0x33: Opcode(name='JC', value=0x33, argc=1, execute=JC),
-    0x34: Opcode(name='JNC', value=0x34, argc=1, execute=JNC),
+    0x31: Opcode(name='JC', value=0x31, argc=1, execute=JC),
+    0x32: Opcode(name='JNC', value=0x32, argc=1, execute=JNC),
+    0x33: Opcode(name='JZ', value=0x33, argc=1, execute=JZ),
+    0x34: Opcode(name='JNZ', value=0x34, argc=1, execute=JNZ),
+    0x35: Opcode(name='JA', value=0x35, argc=1, execute=JA),
+    0x36: Opcode(name='JNA', value=0x36, argc=1, execute=JNA),
+    0x37: Opcode(name='JB', value=0x37, argc=1, execute=JB),
+    0x38: Opcode(name='JNB', value=0x38, argc=1, execute=JNB),
+    0x39: Opcode(name='JE', value=0x39, argc=1, execute=JE),
+    0x3a: Opcode(name='JNE', value=0x3a, argc=1, execute=JNE),
+    0x3b: Opcode(name='JMP', value=0x3b, argc=1, execute=JMP),
+    0x3c: Opcode(name='JMPR', value=0x3c, argc=1, execute=JMPR),
 
     0x40: Opcode(name='PUSH', value=0x40, argc=1, execute=PUSH),
     0x41: Opcode(name='POP', value=0x41, argc=1, execute=POP),
+
+    0x50: Opcode(name='CALL', value=0x40, argc=1, execute=CALL),
+    0x51: Opcode(name='CALLR', value=0x41, argc=1, execute=CALLR),
+    0x52: Opcode(name='RET', value=0x42, argc=1, execute=RET),
 
     0xf2: Opcode(name='OUT', value=0xf2, argc=1, execute=OUT),
     0xff: Opcode(name='END', value=0xff, argc=0, execute=END),
