@@ -17,6 +17,9 @@ class Memory(object):
         except (AssertionError, IndexError):
             return None
 
+    def clean(self):
+        self._mem = bytearray(256)
+
     def print(self):
         print('Memory:')
         print('    ' + ('{:>4}' * 16).format(*range(16)))

@@ -27,19 +27,22 @@ class Instructions(object):
         opcode = opcodes[self.mem.load(self.pop())]
         argv = [self.mem.load(self.pop()) for _ in range(opcode.argc)]
 
-        # if opcode.value == 0 and argv == [0, 0]:
-        #     return False
+        if opcode.value == 0 and argv == [0, 0]:
+            return False
 
-        # print(self.ip, opcode.name, *argv)
-
+        opcode.parse(argv)
+        print(self.ip, opcode)
         opcode.execute(self.cpu, argv)
 
-        # print('zf', self.cpu.zf)
-        # print('cf', self.cpu.cf)
-        # self.reg.print()
-        # self.mem.print()
+        # self.debug()
 
         return True
+
+    def debug(self):
+        print('zf', self.cpu.zf)
+        print('cf', self.cpu.cf)
+        self.reg.print()
+        self.mem.print()
 
     def pop(self):
         self.ip += 1

@@ -17,6 +17,9 @@ class Registers(object):
         except (AssertionError, IndexError):
             return None
 
+    def clean(self):
+        self._reg = bytearray(8)
+
     def print(self):
         print('Registers:')
         print('    ' + ('{:>4}' * len(self._reg)).format(*range(len(self._reg))))

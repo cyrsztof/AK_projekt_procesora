@@ -1,3 +1,5 @@
+import subprocess
+
 from instructions import Instructions
 from memory import Memory
 from registers import Registers
@@ -20,8 +22,6 @@ class CPU(object):
 
 if __name__ == '__main__':
     cpu = CPU()
-
-    import subprocess
 
     fname = 'fib.nasm'
     subprocess.call(['nasm', fname])
