@@ -9,6 +9,6 @@ class Stack(object):
         self.mem.store(self.sp, value)
         self.sp -= 1
 
-    def pop(self, reg):
+    def pop(self):
         self.sp += 1
         return self.mem.load(self.sp)

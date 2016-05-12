@@ -23,8 +23,8 @@ class CPU(object):
 if __name__ == '__main__':
     cpu = CPU()
 
-    fname = 'fib.nasm'
-    subprocess.call(['nasm', fname])
-    cpu.instr.read_from_file(fname.split('.')[0])
+    fname = 'hello'
+    print(subprocess.call(['nasm', fname + '.nasm']))
+    cpu.instr.read_from_file(fname)
 
     cpu.run()

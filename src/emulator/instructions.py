@@ -31,18 +31,19 @@ class Instructions(object):
             return False
 
         opcode.parse(argv)
-        print(self.ip, opcode)
         opcode.execute(self.cpu, argv)
 
-        # self.debug()
+        self.debug(opcode, 0)
 
         return True
 
-    def debug(self):
-        print('zf', self.cpu.zf)
-        print('cf', self.cpu.cf)
-        self.reg.print()
-        self.mem.print()
+    def debug(self, opcode, verb=0):
+        if verb > 0:
+            print('\t{:<6}{}'.format(self.ip, opcode))
+            if verb > 1:
+                print('z, c = {:d}, {:d}'.format(self.cpu.zf, self.cpu.cf))
+                self.reg.print()
+                self.mem.print()
 
     def pop(self):
         self.ip += 1

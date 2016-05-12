@@ -34,10 +34,7 @@ def SET(system, args):
 
 
 def LD(system, args):
-    byte = system.mem.load(system.reg[args[0]])
-    if byte is None:
-        return None
-    system.reg[args[1]] = byte
+    system.reg[args[1]] = system.mem.load(system.reg[args[0]])
 
 
 def ST(system, args):
@@ -107,23 +104,21 @@ def CMP(system, args):
 def JC(system, args):
     if system.cf:
         system.instr.ip += args[0]
-        system.instr.ip &= 0xff
 
 
 def JNC(system, args):
     if not system.cf:
         system.instr.ip += args[0]
-        system.instr.ip &= 0xff
 
 
 def JZ(system, args):
     if system.zf:
-        system.instr.ip = args[0] & 0xff
+        system.instr.ip = args[0]
 
 
 def JNZ(system, args):
     if not system.zf:
-        system.instr.ip = args[0] & 0xff
+        system.instr.ip = args[0]
 
 
 def JA(system, args):
@@ -151,7 +146,7 @@ def JNE(system, args):
 
 
 def JMP(system, args):
-    system.instr.ip = args[0] & 0xff
+    system.instr.ip = args[0]
 
 
 def JMPR(system, args):
@@ -163,11 +158,12 @@ def PUSH(system, args):
 
 
 def POP(system, args):
-    system.reg[args[0]] = system.stack.pop(args[0])
+    system.reg[args[0]] = system.stack.pop()
 
 
 def CALL(system, args):
-    pass
+    system.stack.push(system.instr.ip)
+    system.instr.ip = args[0]
 
 
 def CALLR(system, args):
@@ -175,7 +171,7 @@ def CALLR(system, args):
 
 
 def RET(system, args):
-    pass
+    system.instr.ip = system.stack.pop()
 
 
 def OUT(system, args):
@@ -226,9 +222,9 @@ opcodes = {
 
     0x50: Opcode(execute=CALL, argc=1),
     0x51: Opcode(execute=CALLR, argc=1),
-    0x52: Opcode(execute=RET, argc=1),
+    0x52: Opcode(execute=RET, argc=0),
 
-    0xf2: Opcode(execute=OUT, argc=1),
+    0xf0: Opcode(execute=OUT, argc=1),
     0xff: Opcode(execute=END, argc=0),
 }
 
