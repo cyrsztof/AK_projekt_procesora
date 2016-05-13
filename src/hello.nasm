@@ -6,7 +6,6 @@ foo:
     POP R3
     POP R2
     PUSH R3
-    ;SET hello, R2
 
     SET 0, R0
     SET 1, R1
@@ -28,9 +27,11 @@ start:
     SET hello, R2
     PUSH R2
     CALL foo
+
     SET world, R2
     PUSH R2
     CALL foo
+
     END
 
 hello:

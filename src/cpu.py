@@ -1,5 +1,3 @@
-import subprocess
-
 from instructions import Instructions
 from memory import Memory
 from registers import Registers
@@ -7,24 +5,15 @@ from stack import Stack
 
 
 class CPU(object):
-    def __init__(self):
+    def __init__(self, verb=0):
         self.mem = Memory()
         self.reg = Registers()
         self.instr = Instructions(self)
         self.stack = Stack(self)
         self.zf = False
         self.cf = False
+        self.verb = verb
 
     def run(self):
-        while self.instr.next():
+        while self.instr.next(self.verb):
             pass
-
-
-if __name__ == '__main__':
-    cpu = CPU()
-
-    fname = 'hello'
-    print(subprocess.call(['nasm', fname + '.nasm']))
-    cpu.instr.read_from_file(fname)
-
-    cpu.run()

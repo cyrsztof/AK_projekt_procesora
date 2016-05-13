@@ -21,7 +21,7 @@ class Memory(object):
         self._mem = bytearray(256)
 
     def print(self):
-        print('Memory:')
+        print('    ' + 'Memory:')
         print('    ' + ('{:>4}' * 16).format(*range(16)))
         print('    ' + '-' * 16 * 4)
         for i in range(16):

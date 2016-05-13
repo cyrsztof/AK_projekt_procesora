@@ -149,10 +149,6 @@ def JMP(system, args):
     system.instr.ip = args[0]
 
 
-def JMPR(system, args):
-    pass
-
-
 def PUSH(system, args):
     system.stack.push(system.reg[args[0]])
 
@@ -164,10 +160,6 @@ def POP(system, args):
 def CALL(system, args):
     system.stack.push(system.instr.ip)
     system.instr.ip = args[0]
-
-
-def CALLR(system, args):
-    pass
 
 
 def RET(system, args):
@@ -182,7 +174,7 @@ def END(system, args):
     sys.exit(0)
 
 
-opcodes = {
+OPCODES = {
     0x00: Opcode(execute=MOV, argc=2),
     0x01: Opcode(execute=SET, argc=2),
     0x02: Opcode(execute=LD, argc=2),
@@ -215,18 +207,16 @@ opcodes = {
     0x39: Opcode(execute=JE, argc=1),
     0x3a: Opcode(execute=JNE, argc=1),
     0x3b: Opcode(execute=JMP, argc=1),
-    0x3c: Opcode(execute=JMPR, argc=1),
 
     0x40: Opcode(execute=PUSH, argc=1),
     0x41: Opcode(execute=POP, argc=1),
 
     0x50: Opcode(execute=CALL, argc=1),
-    0x51: Opcode(execute=CALLR, argc=1),
-    0x52: Opcode(execute=RET, argc=0),
+    0x51: Opcode(execute=RET, argc=0),
 
     0xf0: Opcode(execute=OUT, argc=1),
     0xff: Opcode(execute=END, argc=0),
 }
 
-for i in opcodes:
-    opcodes[i].value = i
+for i in OPCODES:
+    OPCODES[i].value = i

@@ -21,7 +21,7 @@ class Registers(object):
         self._reg = bytearray(8)
 
     def print(self):
-        print('Registers:')
+        print('    ' + 'Registers:')
         print('    ' + ('{:>4}' * len(self._reg)).format(*range(len(self._reg))))
         print('    ' + '-' * len(self._reg) * 4)
         print('    ' + ('{:>4}' * len(self._reg)).format(*self._reg))

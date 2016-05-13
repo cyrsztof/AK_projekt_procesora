@@ -126,10 +126,6 @@ db 0x3a, %1
 db 0x3b, %1
 %endmacro
 
-%macro JMPR 1
-db 0x3c, %1
-%endmacro
-
 
 %macro PUSH 1
 db 0x40, %1
@@ -144,12 +140,8 @@ db 0x41, %1
 db 0x50, %1
 %endmacro
 
-%macro CALLR 1
-db 0x51, %1
-%endmacro
-
 %macro RET 0
-db 0x52
+db 0x51
 %endmacro
 
 

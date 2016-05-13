@@ -1,4 +1,4 @@
-from opcodes import opcodes
+from opcodes import OPCODES
 
 
 class Instructions(object):
@@ -23,8 +23,8 @@ class Instructions(object):
         self.ip = index
         return self.mem[index]
 
-    def next(self):
-        opcode = opcodes[self.mem.load(self.pop())]
+    def next(self, verb=0):
+        opcode = OPCODES[self.mem.load(self.pop())]
         argv = [self.mem.load(self.pop()) for _ in range(opcode.argc)]
 
         if opcode.value == 0 and argv == [0, 0]:
@@ -33,17 +33,19 @@ class Instructions(object):
         opcode.parse(argv)
         opcode.execute(self.cpu, argv)
 
-        self.debug(opcode, 0)
+        self.debug(opcode, verb)
 
         return True
 
     def debug(self, opcode, verb=0):
-        if verb > 0:
+        if verb & 1:
             print('\t{:<6}{}'.format(self.ip, opcode))
-            if verb > 1:
-                print('z, c = {:d}, {:d}'.format(self.cpu.zf, self.cpu.cf))
-                self.reg.print()
-                self.mem.print()
+        if verb & 2:
+            print('z, c = {:d}, {:d}'.format(self.cpu.zf, self.cpu.cf))
+        if verb & 4:
+            self.reg.print()
+        if verb & 8:
+            self.mem.print()
 
     def pop(self):
         self.ip += 1
