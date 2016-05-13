@@ -4,7 +4,7 @@ from cpu import CPU
 
 
 def main():
-    cpu = CPU()
+    cpu = CPU(0)
 
     fname = 'fib'
     if subprocess.call(['nasm', fname + '.nasm']):
