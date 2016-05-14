@@ -120,16 +120,14 @@ JNB adres
 JE adres
 JNE adres
 ```
-##### Bezwarunkowe
+##### Bezwarunkowy
 ```
 JMP adres
-JMPR rejestr
 ```
 #### Funkcje
 ##### Wywołanie
 ```
 CALL adres
-CALLR rejestr
 ```
 ##### Powrót
 ```

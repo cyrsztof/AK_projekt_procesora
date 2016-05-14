@@ -1,5 +1,4 @@
 fname = 'hello'
-fname2 = fname + '2'
 
 with open(fname, 'rb') as f:
     nasm = f.read()

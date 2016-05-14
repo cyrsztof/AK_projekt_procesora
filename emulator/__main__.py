@@ -17,3 +17,4 @@ if __name__ == '__main__':
         main(sys.argv[1])
     else:
         print("Missing file name")
+        sys.exit(1)
