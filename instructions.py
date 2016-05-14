@@ -12,7 +12,7 @@ class Instructions(object):
         with open(fname, 'rb') as f:
             data = f.read()
 
-        print('file', fname, len(data), list(data))
+        # print('file', fname, len(data), list(data))
         self.store_in_memory(data)
 
     def store_in_memory(self, data):

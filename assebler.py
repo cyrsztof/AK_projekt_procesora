@@ -1,4 +1,7 @@
+#!/usr/bin/python3.5
+
 import re
+import sys
 
 from opcodes import OPCODES
 
@@ -6,6 +9,7 @@ from opcodes import OPCODES
 class Assebler(object):
     token_pattern = r""" #DB .*|       # for DB
                    \[.*\]|
+                   %.*|
                    '.*'|        # for constants
                    ".*"|        # for strings
                    \w+:?        # for everything else
@@ -31,6 +35,21 @@ class Assebler(object):
     def filter_tokens(self):
         self.code = re.findall(self.token_pattern, self.code, re.VERBOSE)
 
+    def parse_directives(self):
+        dirs = []
+        for i, v in enumerate(self.code):
+            if v.startswith('%'):
+                dirs.append((i, v))
+
+        for i, v in dirs[::-1]:
+            del self.code[i]
+            v = v.split()
+            if v[0] == '%define':
+                if v[2].startswith("'"):
+                    self.opcodes[v[1]] = ord(v[2].strip("'"))
+                else:
+                    self.opcodes[v[1]] = int(v[2])
+
     def expand_labels(self):
         for i, v in enumerate(self.code):
             if v.endswith(':'):
@@ -45,7 +64,7 @@ class Assebler(object):
                 for ii, vv in enumerate(item):
                     vv = vv.strip()
                     if vv.startswith('"'):
-                        self.code.insert(i + ii, [ord(j) for j in vv.strip('"')])
+                        self.code.insert(i + ii, [str(ord(j)) for j in vv.strip('"')])
                     else:
                         self.code.insert(i + ii, vv)
 
@@ -75,8 +94,9 @@ class Assebler(object):
         self.remove_comments()
         self.parse_db()
         self.filter_tokens()
-        self.expand_labels()
+        self.parse_directives()
         self.expand_db()
+        self.expand_labels()
         self.expand_int()
         self.expand_quotes()
         self.insert_opcode()
@@ -94,10 +114,16 @@ class Assebler(object):
         return outlist
 
 
-if __name__ == '__main__':
+def main(fname):
     a = Assebler()
-    fname = 'hello2'
-    p = a.parse(fname + '.nasm')
-    with open(fname, 'wb') as f:
+    p = a.parse(fname)
+    with open(fname.split('.')[0], 'wb') as f:
         f.write(bytearray(p))
-    print(p)
+        # print(p)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        main(sys.argv[1])
+    else:
+        print("Missing file name")
