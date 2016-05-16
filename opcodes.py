@@ -122,27 +122,33 @@ def JNZ(system, args):
 
 
 def JA(system, args):
-    pass
+    if system.cf:
+        system.instr.ip = args[0]
 
 
 def JNA(system, args):
-    pass
+    if not system.cf:
+        system.instr.ip = args[0]
 
 
 def JB(system, args):
-    pass
+    if not system.zf and not system.cf:
+        system.instr.ip = args[0]
 
 
 def JNB(system, args):
-    pass
+    if system.zf or system.cf:
+        system.instr.ip = args[0]
 
 
 def JE(system, args):
-    pass
+    if system.zf:
+        system.instr.ip = args[0]
 
 
 def JNE(system, args):
-    pass
+    if not system.zf:
+        system.instr.ip = args[0]
 
 
 def JMP(system, args):

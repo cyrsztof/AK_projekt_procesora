@@ -14,7 +14,7 @@ def main(fname, verb=0):
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
-        main(sys.argv[1])
+        main(sys.argv[1], 0)
     else:
         print("Missing file name")
         sys.exit(1)
