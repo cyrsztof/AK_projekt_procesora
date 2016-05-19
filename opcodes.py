@@ -22,7 +22,7 @@ class Opcode(object):
     #     self.arguments = arguments
 
     def __str__(self):
-        return ' '.join((self.name, *map(str, self.arguments)))
+        return ' '.join([self.name] + [str(i) for i in self.arguments])
 
 
 def MOV(system, args):
@@ -176,6 +176,15 @@ def OUT(system, args):
     print(chr(system.reg[args[0]]), end='')
 
 
+def IN(system, args):
+    inp = input()
+    if inp:
+        inp = ord(inp[0])
+    else:
+        inp = 0
+    system.reg[args[0]] = inp
+
+
 def END(system, args):
     sys.exit(0)
 
@@ -221,6 +230,7 @@ OPCODES = {
     0x51: Opcode(execute=RET, argc=0),
 
     0xf0: Opcode(execute=OUT, argc=1),
+    0xf1: Opcode(execute=IN, argc=1),
     0xff: Opcode(execute=END, argc=0),
 }
 
