@@ -178,11 +178,7 @@ def OUT(system, args):
 
 def IN(system, args):
     inp = input()
-    if inp:
-        inp = ord(inp[0])
-    else:
-        inp = 0
-    system.reg[args[0]] = inp
+    system.reg[args[0]] = ord(inp and inp[0] or '\0')
 
 
 def END(system, args):
