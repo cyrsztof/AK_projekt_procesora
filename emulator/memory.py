@@ -1,24 +1,24 @@
 class Memory(object):
     def __init__(self):
-        self._mem = bytearray(256)
+        self.mem = bytearray(256)
 
     def load(self, address):
         try:
             assert address >= 0
-            return self._mem[address]
+            return self.mem[address]
         except (AssertionError, IndexError):
             return None
 
     def store(self, address, value):
         try:
             assert address >= 0
-            self._mem[address] = value
+            self.mem[address] = value
             return True
         except (AssertionError, IndexError):
             return None
 
     def clean(self):
-        self._mem = bytearray(256)
+        self.mem = bytearray(256)
 
     def print(self):
         print('    ' + 'Memory:')
